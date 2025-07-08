@@ -1,0 +1,83 @@
+const express = require('express');
+const router = express.Router();
+const Event = require('../models/Events');
+const Token = require('../models/Token');
+const Allocation = require('../models/Allocation');
+
+// Time overlap check
+function isFree(events, examStart, examEnd) {
+    return !events.some(e =>
+        examStart < e.end && examEnd > e.start
+    );
+}
+
+// Greedy algorithm
+function greedyAllocation(teachers, totalRooms, examTime) {
+    const assigned = [];
+
+    for (let i = 0; i < totalRooms; i++) {
+        const available = teachers.filter(t => isFree(t.events, examTime.start, examTime.end));
+        available.sort((a, b) => a.dutyCount - b.dutyCount);
+
+        if (available.length === 0) break;
+
+        const selected = available[0];
+        assigned.push(selected.email);
+        selected.dutyCount++;
+    }
+
+    return assigned;
+}
+
+router.post('/allocate', async (req, res) => {
+    try {
+        const { examDate, startTime, endTime, venue, totalRooms } = req.body;
+
+        const examStart = new Date(`${examDate}T${startTime}`);
+        const examEnd = new Date(`${examDate}T${endTime}`);
+
+        const tokens = await Token.find({});
+        const teachers = [];
+
+        for (const t of tokens) {
+            const events = await Event.find({ 
+                email: t.email, 
+                start: { $lt: examEnd }, 
+                end: { $gt: examStart } 
+            });
+
+            teachers.push({
+                email: t.email,
+                dutyCount: t.dutyCount,
+                events
+            });
+        }
+
+        const assigned = greedyAllocation(teachers, totalRooms, { start: examStart, end: examEnd });
+
+        // Store allocation result
+        await Allocation.create({
+            date: examDate,
+            startTime,
+            endTime,
+            venue,
+            assigned
+        });
+
+        // Update dutyCount in DB
+        for (const email of assigned) {
+            await Token.updateOne({ email }, { $inc: { dutyCount: 1 } });
+        }
+
+        res.json({
+            success: true,
+            assigned
+        });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ success: false, error: 'Internal Server Error' });
+    }
+});
+
+module.exports = router;

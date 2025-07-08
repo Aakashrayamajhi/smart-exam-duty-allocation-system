@@ -1,0 +1,11 @@
+.allocatedlist li {
+    list-style: circle;
+
+}
+
+#pdf {
+
+    width: 100px;
+    height: 35px;
+
+}

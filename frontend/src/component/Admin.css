@@ -1,0 +1,132 @@
+.admin-layout {
+    display: flex;
+    height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f5f7fb;
+}
+
+.sidebar {
+    width: 220px;
+    background: #fff;
+    border-right: 1px solid #ddd;
+    padding: 20px;
+
+}
+
+.sidebar-title {
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.sidebar-list {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-item {
+    margin: 15px 0;
+    cursor: pointer;
+    color: #333;
+
+}
+
+.sidebar-item a {
+    text-decoration: none;
+
+}
+
+
+
+.admin-main {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: #007bff;
+    color: white;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.navbar-left {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.navbar-right {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.btn {
+    background: white;
+    color: #007bff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
+
+.avatar {
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+}
+
+
+
+.card-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.card-row>* {
+    flex: 1 1 200px;
+}
+
+
+.summary-card {
+    padding: 5px;
+    border-radius: 10px;
+    color: white;
+
+}
+
+.card-value {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.card-desc {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.services {
+    margin-top: 30px;
+}
+
+.progress-wrapper {
+    margin-bottom: 15px;
+}
+
+.progress-bar {
+    height: 10px;
+    background: #ddd;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 20px;
+}
