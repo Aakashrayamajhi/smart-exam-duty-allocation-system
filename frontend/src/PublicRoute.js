@@ -7,4 +7,5 @@ const PublicRoute = ({ children }) => {
     return token ? <Navigate to="/admin" /> : children
 }
 
+
 export default PublicRoute

@@ -1,6 +1,7 @@
 /* === About.js === */
 import React from "react";
 import './About.css';
+import './Contact.css'
 import Image from './aakash.jpg';
 
 const About = () => {
@@ -47,6 +48,8 @@ const About = () => {
                     </p>
                 </div>
             </section>
+
+
         </div>
     );
 };

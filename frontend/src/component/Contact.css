@@ -162,3 +162,30 @@
     color: white;
     text-align: center;
 }
+
+@media screen and (max-width: 768px) {
+    .contact-card {
+        flex-direction: column;
+
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-row input[type="email"] {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .contact-form input[type="email"] {
+        max-width: 100%;
+        max-height: 40px;
+    }
+
+    .contact-image {
+        clip-path: none;
+        border-top: 1px solid #e5e7eb;
+        display: none;
+    }
+}

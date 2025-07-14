@@ -117,6 +117,6 @@ setInterval(async () => {
     } catch (err) {
         console.error('Periodic sync error:', err.message)
     }
-}, 0.1 * 60 * 1000)
+}, 5 * 60 * 1000)
 
 export default calendar
